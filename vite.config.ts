@@ -15,5 +15,5 @@ export default defineConfig({
       src: "/src",
     },
   },
-  base: "/youtube-creator-dashboard"
+  base: "/youtube-creator-dashboard/"
 })
