@@ -1,13 +1,13 @@
-import { createFileRoute, useNavigate } from '@tanstack/react-router'
-import { useGoogleLogin } from '@react-oauth/google';
+import { createFileRoute, useNavigate } from "@tanstack/react-router"
+import { useGoogleLogin } from "@react-oauth/google";
 
-import Card from 'components/Card'
-import Button from 'components/Button';
+import Card from "components/Card"
+import Button from "components/Button";
 
 import "./login.css";
-import getUserInfo from 'lib/api/getUserInfo';
+import getUserInfo from "lib/api/getUserInfo";
 
-export const Route = createFileRoute('/login/')({
+export const Route = createFileRoute("/login/")({
   component: Login,
 })
 

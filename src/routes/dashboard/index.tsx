@@ -1,12 +1,12 @@
-import * as React from 'react'
-import { createFileRoute } from '@tanstack/react-router'
+import * as React from "react"
+import { createFileRoute } from "@tanstack/react-router"
 
-import Card from 'components/Card';
-import CheckAuth from 'components/CheckAuth';
+import Card from "components/Card";
+import CheckAuth from "components/CheckAuth";
 
 import "./dashboard.css";
 
-export const Route = createFileRoute('/dashboard/')({
+export const Route = createFileRoute("/dashboard/")({
   component: Dashboard,
 })
 

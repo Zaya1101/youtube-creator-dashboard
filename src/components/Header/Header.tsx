@@ -1,8 +1,8 @@
-import { useContext } from 'react';
+import { useContext } from "react";
 
-import { Link } from '@tanstack/react-router'
+import { Link } from "@tanstack/react-router"
 
-import { UserContext } from 'lib/context/userContext';
+import { UserContext } from "lib/context/userContext";
 
 import "./header.css";
 
@@ -13,16 +13,16 @@ export default function Header() {
       <Link
         to="/dashboard"
         activeProps={{
-          className: 'active',
+          className: "active",
         }}
         activeOptions={{ exact: true }}
       >
         Dashboard
-      </Link>{' '}
+      </Link>{" "}
       <Link
         to="/tasks"
         activeProps={{
-          className: 'active',
+          className: "active",
         }}
       >
         Tasks
