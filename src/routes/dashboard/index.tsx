@@ -12,7 +12,7 @@ export const Route = createFileRoute('/dashboard/')({
 function Dashboard() {
   return (
     <div id="Dashboard">
-      <div className="dashboard-grid">
+      <div className="dashboard-container fade-in">
         <div className="dashboard-grid-col-1">
           <Card title="Recent Comments" className="recent-comments-widget">
             <p>There are no comments yet.</p>

@@ -1,4 +1,4 @@
-.dashboard-grid {
+.dashboard-container {
   display: grid;
   grid-template-columns: 0.25fr 0.75fr;
   grid-gap: 20px;
