@@ -3,6 +3,7 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import Card from 'components/Card';
 import Table from 'components/Table';
+import CheckAuth from 'components/CheckAuth';
 
 import './tasks.css';
 
@@ -31,17 +32,19 @@ const columnns = [
 
 function Tasks() {
   return (
-    <div id="Tasks">
-      <div className="tasks-container fade-in">
-        <Card title="Tasks" className="tasks-card">
-          <Table
-            columns={columnns}
-            data={[]}
-            isLoading={false}
-            noDataText="No tasks found."
-          />
-        </Card>
+    <CheckAuth>
+      <div id="Tasks">
+        <div className="tasks-container fade-in">
+          <Card title="Tasks" className="tasks-card">
+            <Table
+              columns={columnns}
+              data={[]}
+              isLoading={false}
+              noDataText="No tasks found."
+            />
+          </Card>
+        </div>
       </div>
-    </div>
+    </CheckAuth>
   );
 }

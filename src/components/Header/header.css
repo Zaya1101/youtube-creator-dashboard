@@ -19,3 +19,16 @@
   font-weight: bold;
   color: rgb(215, 71, 71);
 }
+
+.user {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+}
+
+.user img {
+  border-radius: 50%;
+  width: 25px;
+}
