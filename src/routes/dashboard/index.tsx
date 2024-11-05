@@ -20,16 +20,22 @@ import getViewsTimeseries from "lib/api/getViewsTimeseries";
 
 import useAbortController from "hooks/useAbortController";
 
+import type { 
+  Subscriber,
+  PieChartData,
+  LineChartData
+} from "types";
+
 export const Route = createFileRoute("/dashboard/")({
   component: Dashboard,
 })
 
 export function Dashboard() {
 
-  const [ recentSubscribersData, setRecentSubscribersData ] = useState([]);
-  const [ likesDislikesData, setLikesDislikesData ] = useState([]);
-  const [ audienceDemographicsData, setAudienceDemographicsData ] = useState([]);
-  const [ viewsData, setViewsData ] = useState([]);
+  const [ recentSubscribersData, setRecentSubscribersData ] = useState<Subscriber[]>([]);
+  const [ likesDislikesData, setLikesDislikesData ] = useState<PieChartData[]>([]);
+  const [ audienceDemographicsData, setAudienceDemographicsData ] = useState<PieChartData[]>([]);
+  const [ viewsData, setViewsData ] = useState<LineChartData>([]);
 
   useEffect(() => {
     const { controller, signal } = useAbortController();
@@ -97,7 +103,7 @@ export function Dashboard() {
       };
       getAudienceDemographicsData()
         .then((data) => {
-          const formattedData = data.map((row: any) => {
+          const formattedData = data.map((row: string[]) => {
             return { 
               name: row[0] + " " + row[1], 
               value: row[2]
@@ -142,7 +148,7 @@ export function Dashboard() {
         <div className="dashboard-container fade-in">
           <div className="dashboard-grid-col-1">
             <Card title="Recent Subscribers" className="recent-comments-widget">
-              {recentSubscribersData?.map((subscriber: any, index) => (
+              {recentSubscribersData?.map((subscriber: Subscriber, index) => (
                 <div key={index} className="subscriber">
                   <div className="subscriber-info">
                     <img src={subscriber.subscriberSnippet.thumbnails.default.url} alt="Subscriber Thumbnail" />

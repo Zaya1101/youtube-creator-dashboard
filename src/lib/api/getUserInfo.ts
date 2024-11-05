@@ -1,10 +1,4 @@
-type UserInfo = {
-  given_name: string;
-  family_name: string;
-  email: string;
-  picture: string;
-  error_description?: string;
-}
+import { UserInfo } from "types";
 
 export default async function getUserInfo(accessToken: string) {
   const userInfo: UserInfo = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
