@@ -11,6 +11,7 @@ import ContextProvider from "components/ContextProvider"
 const router = createRouter({
   routeTree,
   defaultPreload: "intent",
+  basepath: "/youtube-creator-dashboard",
 })
 
 // Register things for typesafety
