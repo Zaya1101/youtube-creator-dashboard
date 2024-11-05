@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "homepage": "https://zaya1101.github.io/youtube-creator-dashboard",
   "scripts": {
     "typecheck": "tsc --noEmit",
     "dev": "vite --port=3001",
