@@ -29,6 +29,14 @@
   flex-basis: 100%;
 }
 
+.subscriber-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 5px 0px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
 @media screen and (max-width: 1200px) {
   .dashboard-container {
     grid-template-columns: 1fr;
