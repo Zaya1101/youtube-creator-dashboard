@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <div className="header">
       <Link
-        to="/"
+        to="/dashboard"
         activeProps={{
           className: 'active',
         }}

@@ -11,27 +11,34 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as TasksImport } from './routes/tasks'
-import { Route as LoginImport } from './routes/login'
 import { Route as IndexImport } from './routes/index'
+import { Route as TasksIndexImport } from './routes/tasks/index'
+import { Route as LoginIndexImport } from './routes/login/index'
+import { Route as DashboardIndexImport } from './routes/dashboard/index'
 
 // Create/Update Routes
-
-const TasksRoute = TasksImport.update({
-  id: '/tasks',
-  path: '/tasks',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const LoginRoute = LoginImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const TasksIndexRoute = TasksIndexImport.update({
+  id: '/tasks/',
+  path: '/tasks/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LoginIndexRoute = LoginIndexImport.update({
+  id: '/login/',
+  path: '/login/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DashboardIndexRoute = DashboardIndexImport.update({
+  id: '/dashboard/',
+  path: '/dashboard/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -46,18 +53,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginImport
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardIndexImport
       parentRoute: typeof rootRoute
     }
-    '/tasks': {
-      id: '/tasks'
+    '/login/': {
+      id: '/login/'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/tasks/': {
+      id: '/tasks/'
       path: '/tasks'
       fullPath: '/tasks'
-      preLoaderRoute: typeof TasksImport
+      preLoaderRoute: typeof TasksIndexImport
       parentRoute: typeof rootRoute
     }
   }
@@ -67,42 +81,47 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/login': typeof LoginRoute
-  '/tasks': typeof TasksRoute
+  '/dashboard': typeof DashboardIndexRoute
+  '/login': typeof LoginIndexRoute
+  '/tasks': typeof TasksIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/login': typeof LoginRoute
-  '/tasks': typeof TasksRoute
+  '/dashboard': typeof DashboardIndexRoute
+  '/login': typeof LoginIndexRoute
+  '/tasks': typeof TasksIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/login': typeof LoginRoute
-  '/tasks': typeof TasksRoute
+  '/dashboard/': typeof DashboardIndexRoute
+  '/login/': typeof LoginIndexRoute
+  '/tasks/': typeof TasksIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/tasks'
+  fullPaths: '/' | '/dashboard' | '/login' | '/tasks'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/tasks'
-  id: '__root__' | '/' | '/login' | '/tasks'
+  to: '/' | '/dashboard' | '/login' | '/tasks'
+  id: '__root__' | '/' | '/dashboard/' | '/login/' | '/tasks/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  LoginRoute: typeof LoginRoute
-  TasksRoute: typeof TasksRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
+  LoginIndexRoute: typeof LoginIndexRoute
+  TasksIndexRoute: typeof TasksIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  LoginRoute: LoginRoute,
-  TasksRoute: TasksRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
+  LoginIndexRoute: LoginIndexRoute,
+  TasksIndexRoute: TasksIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -116,18 +135,22 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/login",
-        "/tasks"
+        "/dashboard/",
+        "/login/",
+        "/tasks/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/login": {
-      "filePath": "login.tsx"
+    "/dashboard/": {
+      "filePath": "dashboard/index.tsx"
     },
-    "/tasks": {
-      "filePath": "tasks.tsx"
+    "/login/": {
+      "filePath": "login/index.tsx"
+    },
+    "/tasks/": {
+      "filePath": "tasks/index.tsx"
     }
   }
 }
