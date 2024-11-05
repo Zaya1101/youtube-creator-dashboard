@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router"
-import { format } from "date-fns";
+import { 
+  format,
+  startOfMonth,
+  startOfYear
+} from "date-fns";
 
 import Card from "components/Card";
 import CheckAuth from "components/CheckAuth";
@@ -52,8 +56,8 @@ export function Dashboard() {
 
     if (likesDislikesData?.length === 0) {
       const getLikesDislikesData = async () => {
-        const startDate = "2024-01-01";
-        const endDate = "2024-11-01";
+        const startDate = format(startOfYear(new Date()), "yyyy-MM-dd");
+        const endDate = format(startOfMonth(new Date()), "yyyy-MM-dd");
         const accessToken = localStorage.getItem("googleAccessToken") ?? "";
         const data = await getLikesDislikes(accessToken, startDate, endDate, signal);
     
@@ -84,8 +88,8 @@ export function Dashboard() {
 
     if (audienceDemographicsData?.length === 0) {
       const getAudienceDemographicsData = async () => {
-        const startDate = "2024-01-01";
-        const endDate = "2024-11-01";
+        const startDate = format(startOfYear(new Date()), "yyyy-MM-dd");
+        const endDate = format(startOfMonth(new Date()), "yyyy-MM-dd");
         const accessToken = localStorage.getItem("googleAccessToken") ?? "";
         const data = await getAudienceDemographics(accessToken, startDate, endDate, signal);
     
@@ -113,8 +117,8 @@ export function Dashboard() {
 
     if (viewsData?.length === 0) {
       const getViewsTimeseriesData = async () => {
-        const startDate = "2024-01-01";
-        const endDate = "2024-11-01";
+        const startDate = format(startOfYear(new Date()), "yyyy-MM-dd");
+        const endDate = format(startOfMonth(new Date()), "yyyy-MM-dd");
         const periodGroupBy = "month";
         const accessToken = localStorage.getItem("googleAccessToken") ?? "";
         const data = await getViewsTimeseries(accessToken, startDate, endDate, periodGroupBy, signal);
@@ -151,12 +155,14 @@ export function Dashboard() {
           </div>
           <div className="dashboard-grid-col-2">
             <Card title="Likes/Dislikes" className="likes-dislikes-widget">
+              <p>This Year</p>
               <PieChart 
                 chartData={likesDislikesData} 
                 total={likesDislikesData?.length}
               />
             </Card>
             <Card title="Audience Demographics" className="audience-widget">
+              <p>This Year</p>
               <PieChart 
                 chartData={audienceDemographicsData} 
                 total={audienceDemographicsData?.length}

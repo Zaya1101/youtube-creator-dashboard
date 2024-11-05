@@ -29,6 +29,12 @@
   flex-basis: 100%;
 }
 
+.likes-dislikes-widget p,
+.audience-widget p,
+.total-views-widget p {
+  margin-top: 0;
+}
+
 .subscriber-info {
   display: flex;
   align-items: center;
