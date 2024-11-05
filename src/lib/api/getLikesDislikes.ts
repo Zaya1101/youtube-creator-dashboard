@@ -1,4 +1,4 @@
-export default async function getLikesDislikes(accessToken: string, startDate: string, endDate: string) {
+export default async function getLikesDislikes(accessToken: string, startDate: string, endDate: string, signal: AbortSignal) {
   const userInfo = await fetch("https://youtubeanalytics.googleapis.com/v2/reports"
     + `?startDate=${startDate}`
     + `&endDate=${endDate}`
@@ -7,7 +7,8 @@ export default async function getLikesDislikes(accessToken: string, startDate: s
     + `&token=${accessToken}`, {
     headers: {
       Authorization: `Bearer ${accessToken}`
-    }
+    },
+    signal: signal
   })
     .then((response) => response.json())
     .catch((error) => {

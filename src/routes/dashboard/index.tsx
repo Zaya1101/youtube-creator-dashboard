@@ -14,6 +14,8 @@ import getLikesDislikes from "lib/api/getLikesDislikes";
 import getAudienceDemographics from "lib/api/getAudienceDemographics";
 import getViewsTimeseries from "lib/api/getViewsTimeseries";
 
+import useAbortController from "hooks/useAbortController";
+
 export const Route = createFileRoute("/dashboard/")({
   component: Dashboard,
 })
@@ -26,27 +28,34 @@ export function Dashboard() {
   const [ viewsData, setViewsData ] = useState([]);
 
   useEffect(() => {
+    const { controller, signal } = useAbortController();
+
     if (recentSubscribersData?.length === 0) {
       const getSubscribersData = async () => {
         const accessToken = localStorage.getItem("googleAccessToken") ?? "";
-        const data = await getSubscribers(accessToken);
+        const data = await getSubscribers(accessToken, signal);
     
         return data.items;
       };
       getSubscribersData()
         .then((data) => {
           setRecentSubscribersData(data);
-        });
+      });
+    }
+    return () => {
+      controller.abort();
     }
   }, [recentSubscribersData, setRecentSubscribersData]);
 
   useEffect(() => {
+    const { controller, signal } = useAbortController();
+
     if (likesDislikesData?.length === 0) {
       const getLikesDislikesData = async () => {
         const startDate = "2024-01-01";
         const endDate = "2024-11-01";
         const accessToken = localStorage.getItem("googleAccessToken") ?? "";
-        const data = await getLikesDislikes(accessToken, startDate, endDate);
+        const data = await getLikesDislikes(accessToken, startDate, endDate, signal);
     
         return data?.rows;
       };
@@ -62,17 +71,23 @@ export function Dashboard() {
             }
           })
           setLikesDislikesData(formattedData);
-        });
+      });
+
+      return () => {
+        controller.abort();
+      }
     }
   }, [likesDislikesData, setLikesDislikesData]);
 
   useEffect(() => {
+    const { controller, signal } = useAbortController();
+
     if (audienceDemographicsData?.length === 0) {
       const getAudienceDemographicsData = async () => {
         const startDate = "2024-01-01";
         const endDate = "2024-11-01";
         const accessToken = localStorage.getItem("googleAccessToken") ?? "";
-        const data = await getAudienceDemographics(accessToken, startDate, endDate);
+        const data = await getAudienceDemographics(accessToken, startDate, endDate, signal);
     
         return data.rows;
       };
@@ -85,25 +100,35 @@ export function Dashboard() {
             }
           });
           setAudienceDemographicsData(formattedData);
-        });
+      });
+
+      return () => {
+        controller.abort();
+      }
     }
   }, [audienceDemographicsData, setAudienceDemographicsData]);
 
   useEffect(() => {
+    const { controller, signal } = useAbortController();
+
     if (viewsData?.length === 0) {
       const getViewsTimeseriesData = async () => {
         const startDate = "2024-01-01";
         const endDate = "2024-11-01";
         const periodGroupBy = "month";
         const accessToken = localStorage.getItem("googleAccessToken") ?? "";
-        const data = await getViewsTimeseries(accessToken, startDate, endDate, periodGroupBy);
+        const data = await getViewsTimeseries(accessToken, startDate, endDate, periodGroupBy, signal);
     
         return data.rows;
       };
       getViewsTimeseriesData()
         .then((data) => {
           setViewsData(data);
-        });
+      });
+
+      return () => {
+        controller.abort();
+      }
     }
   }, [viewsData, setViewsData]);
 

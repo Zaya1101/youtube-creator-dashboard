@@ -1,4 +1,4 @@
-export default async function getSubscribers(accessToken: string) {
+export default async function getSubscribers(accessToken: string, signal: AbortSignal) {
   const userInfo = await fetch("https://youtube.googleapis.com/youtube/v3/subscriptions"
     + "?part=subscriberSnippet"
     + "&part=snippet"
@@ -7,7 +7,8 @@ export default async function getSubscribers(accessToken: string) {
     + `&token${accessToken}`, {
     headers: {
       Authorization: `Bearer ${accessToken}`
-    }
+    },
+    signal: signal
   })
     .then((response) => response.json())
     .catch((error) => {
