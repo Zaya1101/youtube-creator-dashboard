@@ -66,6 +66,7 @@ export function Dashboard() {
               />
             </Card>
             <Card title="Total Views" className="total-views-widget">
+              <p>Per Month</p>
               <LineChart 
                 chartData={viewsData} 
                 total={600}

@@ -28,3 +28,32 @@
 .total-views-widget {
   flex-basis: 100%;
 }
+
+@media screen and (max-width: 1200px) {
+  .dashboard-container {
+    grid-template-columns: 1fr;
+  }
+
+  .total-views-widget {
+    flex-grow: 1;
+    flex-basis: 100%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .dashboard-grid-col-2 {
+    flex-direction: column;
+  }
+
+  .likes-dislikes-widget {
+    flex-grow: 0;
+  }
+  
+  .audience-widget {
+    flex-grow: 0;
+  }
+  
+  .total-views-widget {
+    flex-basis: 0;
+  }
+}
