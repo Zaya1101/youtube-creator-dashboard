@@ -1,0 +1,28 @@
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 0.25fr 0.75fr;
+  grid-gap: 20px;
+  padding: 20px;
+}
+
+.recent-comments-widget {
+  min-height: 80vh;
+}
+
+.dashboard-grid-col-2 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.likes-dislikes-widget {
+  flex-grow: 1;
+}
+
+.audience-widget {
+  flex-grow: 1;
+}
+
+.total-views-widget {
+  flex-basis: 100%;
+}
