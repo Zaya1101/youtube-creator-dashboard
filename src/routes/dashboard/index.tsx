@@ -1,4 +1,4 @@
-import * as React from "react"
+import { useState, useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router"
 
 import Card from "components/Card";
@@ -8,11 +8,35 @@ import PieChart from "components/PieChart";
 import "./dashboard.css";
 import LineChart from "components/LineChart";
 
+import getViewsTimeseries from "lib/api/getViewsTimeseries";
+
 export const Route = createFileRoute("/dashboard/")({
   component: Dashboard,
 })
 
-function Dashboard() {
+export function Dashboard() {
+
+  const [ viewsData, setViewsData ] = useState([]);
+
+  useEffect(() => {
+    if (viewsData?.length === 0) {
+      const getViewsTimeseriesData = async () => {
+        const startDate = "2024-01-01";
+        const endDate = "2024-11-01";
+        const periodGroupBy = "month";
+        const accessToken = localStorage.getItem("googleAccessToken") ?? "";
+        const data = await getViewsTimeseries(accessToken, startDate, endDate, periodGroupBy);
+    
+        return data.rows;
+      };
+      getViewsTimeseriesData()
+        .then((data) => {
+          console.log(data);
+          setViewsData(data);
+        });
+    }
+  }, [viewsData, setViewsData]);
+
   return (
     <CheckAuth>
       <div id="Dashboard">
@@ -43,20 +67,7 @@ function Dashboard() {
             </Card>
             <Card title="Total Views" className="total-views-widget">
               <LineChart 
-                chartData={[
-                  {
-                    name: "Jan",
-                    value: 100
-                  },
-                  {
-                    name: "Feb",
-                    value: 200
-                  },
-                  {
-                    name: "Mar",
-                    value: 300  
-                  }
-                ]} 
+                chartData={viewsData} 
                 total={600}
               />
             </Card>

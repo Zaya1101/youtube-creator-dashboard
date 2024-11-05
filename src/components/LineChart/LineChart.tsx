@@ -42,7 +42,7 @@ export default function LineChart({
         trigger: 'axis'
       },
       xAxis: {
-        type: "category",
+        type: "time",
       },
       yAxis: {
         type: "value"
