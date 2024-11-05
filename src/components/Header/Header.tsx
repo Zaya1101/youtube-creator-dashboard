@@ -19,14 +19,6 @@ export default function Header() {
       >
         Dashboard
       </Link>{" "}
-      <Link
-        to="/tasks"
-        activeProps={{
-          className: "active",
-        }}
-      >
-        Tasks
-      </Link>
       <div className="user">
         { user?.givenName }
         <img src={ user?.pictureUrl } alt={ user?.givenName } />
