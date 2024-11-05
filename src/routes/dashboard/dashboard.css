@@ -31,10 +31,20 @@
 
 .subscriber-info {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
   gap: 20px;
   padding: 5px 0px;
   border-bottom: 1px solid #e0e0e0;
+}
+
+.subscriber-info img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.subscribe-date {
+  margin-left: auto;
 }
 
 @media screen and (max-width: 1200px) {

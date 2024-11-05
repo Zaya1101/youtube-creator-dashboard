@@ -141,8 +141,9 @@ export function Dashboard() {
               {recentSubscribersData?.map((subscriber: any, index) => (
                 <div key={index} className="subscriber">
                   <div className="subscriber-info">
+                    <img src={subscriber.subscriberSnippet.thumbnails.default.url} alt="Subscriber Thumbnail" />
                     <p>{subscriber.subscriberSnippet.title}</p>
-                    <p>{format(subscriber.snippet.publishedAt, "dd/MM/yyy")}</p>
+                    <p className="subscribe-date">{format(subscriber.snippet.publishedAt, "dd/MM/yyy")}</p>
                   </div>
                 </div>
               ))}
