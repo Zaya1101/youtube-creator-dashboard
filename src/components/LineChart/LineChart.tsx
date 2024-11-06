@@ -22,7 +22,7 @@ import {
 import { ECBasicOption } from "echarts/types/dist/shared";
 
 type LineChartProps = {
-  chartData: string[];
+  chartData: string[] | undefined;
   total: number;
 }
 

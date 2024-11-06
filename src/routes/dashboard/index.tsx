@@ -32,15 +32,15 @@ export const Route = createFileRoute("/dashboard/")({
 
 export function Dashboard() {
 
-  const [ recentSubscribersData, setRecentSubscribersData ] = useState<Subscriber[]>([]);
-  const [ likesDislikesData, setLikesDislikesData ] = useState<PieChartData[]>([]);
-  const [ audienceDemographicsData, setAudienceDemographicsData ] = useState<PieChartData[]>([]);
-  const [ viewsData, setViewsData ] = useState<LineChartData>([]);
+  const [ recentSubscribersData, setRecentSubscribersData ] = useState<Subscriber[] | undefined>(undefined);
+  const [ likesDislikesData, setLikesDislikesData ] = useState<PieChartData[] | undefined>(undefined);
+  const [ audienceDemographicsData, setAudienceDemographicsData ] = useState<PieChartData[] | undefined>(undefined);
+  const [ viewsData, setViewsData ] = useState<LineChartData | undefined>(undefined);
 
   useEffect(() => {
     const { controller, signal } = useAbortController();
 
-    if (recentSubscribersData?.length === 0) {
+    if (recentSubscribersData == undefined) {
       const getSubscribersData = async () => {
         const accessToken = localStorage.getItem("googleAccessToken") ?? "";
         const data = await getSubscribers(accessToken, signal);
@@ -60,7 +60,7 @@ export function Dashboard() {
   useEffect(() => {
     const { controller, signal } = useAbortController();
 
-    if (likesDislikesData?.length === 0) {
+    if (likesDislikesData == undefined) {
       const getLikesDislikesData = async () => {
         const startDate = format(startOfYear(new Date()), "yyyy-MM-dd");
         const endDate = format(startOfMonth(new Date()), "yyyy-MM-dd");
@@ -92,7 +92,7 @@ export function Dashboard() {
   useEffect(() => {
     const { controller, signal } = useAbortController();
 
-    if (audienceDemographicsData?.length === 0) {
+    if (audienceDemographicsData == undefined) {
       const getAudienceDemographicsData = async () => {
         const startDate = format(startOfYear(new Date()), "yyyy-MM-dd");
         const endDate = format(startOfMonth(new Date()), "yyyy-MM-dd");
@@ -121,7 +121,7 @@ export function Dashboard() {
   useEffect(() => {
     const { controller, signal } = useAbortController();
 
-    if (viewsData?.length === 0) {
+    if (viewsData == undefined) {
       const getViewsTimeseriesData = async () => {
         const startDate = format(startOfYear(new Date()), "yyyy-MM-dd");
         const endDate = format(startOfMonth(new Date()), "yyyy-MM-dd");
@@ -164,21 +164,21 @@ export function Dashboard() {
               <p>This Year</p>
               <PieChart 
                 chartData={likesDislikesData} 
-                total={likesDislikesData?.length}
+                total={likesDislikesData?.length ?? 0}
               />
             </Card>
             <Card title="Audience Demographics" className="audience-widget">
               <p>This Year</p>
               <PieChart 
                 chartData={audienceDemographicsData} 
-                total={audienceDemographicsData?.length}
+                total={audienceDemographicsData?.length ?? 0}
               />
             </Card>
             <Card title="Total Views" className="total-views-widget">
               <p>Per Month</p>
               <LineChart 
                 chartData={viewsData} 
-                total={viewsData?.length}
+                total={viewsData?.length ?? 0}
               />
             </Card>
           </div>
