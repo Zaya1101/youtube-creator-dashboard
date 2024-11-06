@@ -17,6 +17,7 @@ export default function Header() {
     await signOut(accessToken);
     user?.setGivenName("");
     user?.setPictureUrl("");
+    window.localStorage.removeItem("googleAccessToken");
     navigate({
       to: "/login",
     });
