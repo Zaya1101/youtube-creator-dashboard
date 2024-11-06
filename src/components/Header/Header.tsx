@@ -8,6 +8,8 @@ import "./header.css";
 
 export default function Header() {
   const user = useContext(UserContext);
+
+  if (user?.givenName === "") { return null; }
   return (
     <div className="header">
       <Link
@@ -22,6 +24,7 @@ export default function Header() {
       <div className="user">
         { user?.givenName }
         <img src={ user?.pictureUrl } alt={ user?.givenName } />
+        <p>Sign Out</p>
       </div>
     </div>
   )
