@@ -1,13 +1,26 @@
 import { useContext } from "react";
 
-import { Link } from "@tanstack/react-router"
+import { Link, useNavigate } from "@tanstack/react-router"
 
 import { UserContext } from "lib/context/userContext";
+import signOut from "lib/api/signOut";
+import SignoutSvg from "assets/svgs/signout.svg";
 
 import "./header.css";
 
 export default function Header() {
   const user = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const signOutOnClick = async() => {
+    const accessToken = localStorage.getItem("googleAccessToken") ?? "";
+    await signOut(accessToken);
+    user?.setGivenName("");
+    user?.setPictureUrl("");
+    navigate({
+      to: "/login",
+    });
+  }
 
   if (user?.givenName === "") { return null; }
   return (
@@ -24,8 +37,13 @@ export default function Header() {
       <div className="user">
         { user?.givenName }
         <img src={ user?.pictureUrl } alt={ user?.givenName } />
-        <p>Sign Out</p>
       </div>
+      <img 
+        className="signout" 
+        src={ SignoutSvg } 
+        alt="Sign out" 
+        onClick={ signOutOnClick }
+      />
     </div>
   )
 }
